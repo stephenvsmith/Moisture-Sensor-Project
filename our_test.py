@@ -19,18 +19,20 @@ def callback(channel):
         print("Sending to Initial State\n")
         myString = "No water detected"
         streamer.log("Message",myString)
+        streamer.flush()
         print("Sent to IS\n")
     else:
         print("Water detected!\n")
         print("Sending to Initial State\n")
         myString = "Water detected!"
         streamer.log("Message",myString)
+        streamer.flush()
         print("Sent to IS\n")
 
 GPIO.add_event_detect(channel,GPIO.BOTH,bouncetime=300) # goes in a loop to determine changes in the edge
 GPIO.add_event_callback(channel,callback) # Adds a function to call when the event detect is called - this one is good because it won't miss a change in state
 print("Before entering the loop")
 while True:
-   time.sleep(10)
+    sleep(1)
 
 # It is a good idea to use GPIO.cleanup(channel) after the program is done
